@@ -1,6 +1,6 @@
 # URL Shortener
 
-This is a React application that allows users to shorten URLs using the [shrtco.de](https://shrtco.de/) API. It provides a simple user interface for entering a URL and generating a shortened version of it. The application also saves the generated links for future reference.
+This is a React application which uses typescript that allows users to shorten URLs using the [shrtco.de](https://shrtco.de/) API. It provides a simple user interface for entering a URL and generating a shortened version of it. The application also saves the generated links for future reference.
 
 ## Getting Started
 
