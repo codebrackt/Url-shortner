@@ -7,3 +7,4 @@ module.exports = {
     },
     plugins: [],
 }
+// in Tailwind CSS, the postcss.config.js file is used to configure the PostCSS plugins that are necessary to process and transform  CSS code.
