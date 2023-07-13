@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import axios from "axios";
 
@@ -6,6 +6,15 @@ const URLShortener: React.FC = () => {
   // State variables to hold the shortened link and user input
   const [shortenedLink, setShortenedLink] = useState("");
   const [userInput, setUserInput] = useState("");
+  const [savedLinks, setSavedLinks] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Load saved links from local storage on component mount
+    const savedLinksFromStorage = localStorage.getItem("savedLinks");
+    if (savedLinksFromStorage) {
+      setSavedLinks(JSON.parse(savedLinksFromStorage));
+    }
+  }, []);
 
   // Function to fetch data from the API and set the shortened link
   const fetchData = async (): Promise<void> => {
@@ -34,6 +43,9 @@ const URLShortener: React.FC = () => {
       );
       const { full_short_link: shortenedUrl } = response.data.result;
       setShortenedLink(shortenedUrl);
+      const updatedLinks = [...savedLinks, shortenedUrl];
+      setSavedLinks(updatedLinks);
+      localStorage.setItem("savedLinks", JSON.stringify(updatedLinks));
     } catch (error) {
       // if there is any errors encountered it will be catched here and will be displayed to the user
       console.log(error);
@@ -86,6 +98,12 @@ const URLShortener: React.FC = () => {
                 </CopyToClipboard>
               </>
             )}
+          </div>
+          <div className="mt-5">
+            <h2>Saved Links:</h2>
+            {savedLinks.map((link, index) => (
+              <div key={index}>{link}</div>
+            ))}
           </div>
         </div>
       </div>
