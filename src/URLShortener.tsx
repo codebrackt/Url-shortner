@@ -117,7 +117,9 @@ const URLShortener: React.FC = () => {
               Saved Links:
             </Typography>
             {savedLinks.map((link, index) => (
-              <div key={index}>{link}</div>
+              <div key={index}>
+                 <a   target='_blank' href={`${link}`} >{link}</a>
+              </div>
             ))}
           </div>
         </div>
